@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/jonathanpoelen/falcon.parse_number.svg?branch=master)](https://travis-ci.org/jonathanpoelen/falcon.parse_number)
 
+
 # Falcon.Parse_number
 
 Components for compile-time parsing of numbers.
@@ -12,6 +13,7 @@ Supports base 2, 8, 10 and 16 and digit separator (`'`).
 - `parse_integral<class T, char... Digs>`: Checks and converts `parse_int<Digs...>` to std::integral_constant<T, parse_int<Digs...>::value>`.
 - `select_parse_int<char... Digs>`: A std::integral_constant with the smallest integer type
 
+
 ## Literals
 
 ``` cpp
@@ -19,9 +21,9 @@ namespace falcon::literals {
   inline namespace integer_constant_literals {
     constexpr std::integral_constant< int, ...                > operator "" _c();
     constexpr std::integral_constant< unsigned, ...           > operator "" _uc();
-    constexpr std::integral_constant< long, ...               > operator "" _lc();
+    constexpr std::integral_constant< long int, ...           > operator "" _lc();
     constexpr std::integral_constant< unsigned long, ...      > operator "" _ulc();
-    constexpr std::integral_constant< long long, ...          > operator "" _llc();
+    constexpr std::integral_constant< long long int, ...      > operator "" _llc();
     constexpr std::integral_constant< unsigned long long, ... > operator "" _ullc();
   }
 

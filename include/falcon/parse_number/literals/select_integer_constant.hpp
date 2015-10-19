@@ -1,7 +1,12 @@
+// Copyright (c) 2015 Jonathan Poelen
+// Distributed under the MIT License.
+// (See accompanying file LICENSE.md)
+
 #ifndef FALCON_PARSE_NUMBER_LITERALS_SELECT_INTEGER_CONSTANT_HPP
 #define FALCON_PARSE_NUMBER_LITERALS_SELECT_INTEGER_CONSTANT_HPP
 
 #include "../select_parse_int.hpp"
+
 
 namespace falcon {
 inline namespace literals {

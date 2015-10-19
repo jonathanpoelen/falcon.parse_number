@@ -1,7 +1,12 @@
+// Copyright (c) 2015 Jonathan Poelen
+// Distributed under the MIT License.
+// (See accompanying file LICENSE.md)
+
 #ifndef FALCON_PARSE_NUMBER_DIGIT_HPP
 #define FALCON_PARSE_NUMBER_DIGIT_HPP
 
 #include <type_traits>
+
 
 namespace falcon {
 namespace parse_number {
