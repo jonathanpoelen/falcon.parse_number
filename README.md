@@ -8,9 +8,9 @@ Components for compile-time parsing of numbers.
 Supports base 2, 8, 10 and 16 and digit separator (`'`).
 
 - `digit<unsigned Base, char Dig>`: Static member valid is a std::false_type when Dig is a digit separator `'\''`, otherwise is a std::true_type. Digit class inherits a `std::integral_constant<unsigned, /*digit converted*/>`.
-- `parse_number<unsigned Base, char... Digs>`: Make a `std::integral_constant<unsigned long long, /*number*/>`. Base is 2, 8, 10 or 16
-- `parse_int<char... Digs>`: Deducts the base and uses parse_number
-- `parse_integral<class T, char... Digs>`: Checks and converts `parse_int<Digs...>` to std::integral_constant<T, parse_int<Digs...>::value>`.
+- `parse_number<unsigned Base, char... Digs>`: Make a `std::integral_constant<unsigned long long, /*number*/>`.
+- `parse_int<char... Digs>`: Deducts the base and uses parse_number.
+- `parse_integral<class T, char... Digs>`: Checks and converts `parse_int<Digs...>` to `std::integral_constant<T, parse_int<Digs...>::value>`.
 - `select_parse_int<char... Digs>`: A std::integral_constant with the smallest integer type
 
 
