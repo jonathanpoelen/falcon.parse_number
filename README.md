@@ -19,8 +19,9 @@ Supports base 2, 8, 10 and 16 and digit separator (`'`).
 ``` cpp
 namespace falcon::literals {
   inline namespace integer_constant_literals {
-    constexpr std::integral_constant< int, ...                > operator "" _c();
-    constexpr std::integral_constant< unsigned, ...           > operator "" _uc();
+    constexpr std::integral_constant< /* int, long or long long */, ...                        > operator "" _c();
+    constexpr std::integral_constant< /* unsigned, unsigned long or unsigned long long */, ... > operator "" _uc();
+
     constexpr std::integral_constant< long int, ...           > operator "" _lc();
     constexpr std::integral_constant< unsigned long, ...      > operator "" _ulc();
     constexpr std::integral_constant< long long int, ...      > operator "" _llc();

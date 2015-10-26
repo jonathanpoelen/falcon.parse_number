@@ -17,7 +17,12 @@ namespace parse_number {
 template<class Int, class To>
 struct checked_convert_to;
 
-#if defined(__GNUC__) && !defined(__clang__)
+#if !defined(__GNUC__)
+template<class T, T N, class To>
+struct checked_convert_to<std::integral_constant<T, N>, To>
+: std::integral_constant<To, To{N}>
+{};
+#elif defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic error "-Wnarrowing"
 template<class T, T N, class To>
