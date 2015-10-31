@@ -5,8 +5,7 @@
 #ifndef FALCON_PARSE_NUMBER_LITERALS_INTEGERRAL_CONSTANT_HPP
 #define FALCON_PARSE_NUMBER_LITERALS_INTEGERRAL_CONSTANT_HPP
 
-#include "../parse_integral.hpp"
-#include "../select_parse_int.hpp"
+#include "../select_int.hpp"
 
 namespace falcon {
 inline namespace literals {
@@ -14,21 +13,19 @@ inline namespace literals {
 inline namespace integer_constant_literals
 {
 
-  template<char... c> constexpr typename parse_number::detail_::select_int_impl<
-    parse_number::parse_int<c...>::value, int, long, long long
-  >::type operator "" _c() { return {}; }
+  template<char... c> constexpr parse_number::select_int<parse_number::parse_int<c...>::value, int, long, long long>
+  operator "" _c() { return {}; }
 
-  template<char... c> constexpr typename parse_number::detail_::select_int_impl<
-    parse_number::parse_int<c...>::value, unsigned int, unsigned long, unsigned long long
-  >::type operator "" _uc() { return {}; }
+  template<char... c> constexpr parse_number::select_int<parse_number::parse_int<c...>::value, unsigned int, unsigned long, unsigned long long>
+  operator "" _uc() { return {}; }
 
-  template<char... c> constexpr parse_number::parse_integral<long, c...>
+  template<char... c> constexpr parse_number::select_int<parse_number::parse_int<c...>::value, long>
   operator "" _lc() { return {}; }
 
-  template<char... c> constexpr parse_number::parse_integral<unsigned long, c...>
+  template<char... c> constexpr parse_number::select_int<parse_number::parse_int<c...>::value, unsigned long>
   operator "" _ulc() { return {}; }
 
-  template<char... c> constexpr parse_number::parse_integral<long long, c...>
+  template<char... c> constexpr parse_number::select_int<parse_number::parse_int<c...>::value, long long>
   operator "" _llc() { return {}; }
 
   template<char... c> constexpr parse_number::parse_int<c...>

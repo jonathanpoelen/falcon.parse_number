@@ -10,8 +10,8 @@ Supports base 2, 8, 10 and 16 and digit separator (`'`).
 - `digit<unsigned Base, char Dig>`: Static member valid is a std::false_type when Dig is a digit separator `'\''`, otherwise is a std::true_type. Digit class inherits a `std::integral_constant<unsigned, /*digit converted*/>`.
 - `parse_number<unsigned Base, char... Digs>`: Make a `std::integral_constant<unsigned long long, /*number*/>`.
 - `parse_int<char... Digs>`: Deducts the base and uses parse_number.
-- `parse_integral<class T, char... Digs>`: Checks and converts `parse_int<Digs...>` to `std::integral_constant<T, parse_int<Digs...>::value>`.
-- `select_parse_int<char... Digs>`: A std::integral_constant with the smallest integer type
+- `select_int<unsigned long long Val, IntType...>`: A std::integral_constant with the first sufficiently large integer type
+- `smallest_parse_int<char... Digs>`: A std::integral_constant with the smallest unsigned integer type
 
 
 ## Literals
@@ -28,8 +28,9 @@ namespace falcon::literals {
     constexpr std::integral_constant< unsigned long long, ... > operator "" _ullc();
   }
 
-  inline namespace select_integer_constant_literals {
-    constexpr std::integral_constant< /*smallest_integer_type*/, ... > operator "" _ic();
+  inline namespace smallest_integer_constant_literals {
+    constexpr std::integral_constant< /* smallest signed integer type */, ...   > operator "" _small();
+    constexpr std::integral_constant< /* smallest unsigned integer type */, ... > operator "" _usmall();
   }
 
   inline namespace fixed_integer_constant_literals {
@@ -38,10 +39,10 @@ namespace falcon::literals {
     constexpr std::integral_constant< int32_t, ...        > operator "" _s32();
     constexpr std::integral_constant< int64_t, ...        > operator "" _s64();
 
-    constexpr std::integral_constant< uint8_t, ...        > operator "" _s8();
-    constexpr std::integral_constant< uint16_t, ...       > operator "" _s16();
-    constexpr std::integral_constant< uint32_t, ...       > operator "" _s32();
-    constexpr std::integral_constant< uint64_t, ...       > operator "" _s64();
+    constexpr std::integral_constant< uint8_t, ...        > operator "" _u8();
+    constexpr std::integral_constant< uint16_t, ...       > operator "" _u16();
+    constexpr std::integral_constant< uint32_t, ...       > operator "" _u32();
+    constexpr std::integral_constant< uint64_t, ...       > operator "" _u64();
 
     constexpr std::integral_constant< int_fast8_t, ...    > operator "" _fast8();
     constexpr std::integral_constant< int_fast16_t, ...   > operator "" _fast16();

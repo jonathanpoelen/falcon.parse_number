@@ -18,9 +18,13 @@ namespace detail_ {
   struct select_int_impl;
 }
 
-///\brief  A std::integral_constant with the smallest integer type
+///\brief  A std::integral_constant with the first sufficiently large integer type
+template<unsigned long long Val, class... Ints>
+using select_int = typename detail_::select_int_impl<Val, Ints...>::type;
+
+///\brief  A std::integral_constant with the smallest unsigned integer type
 template<char... Digs>
-using select_parse_int = typename detail_::select_int_impl<
+using smallest_parse_int = typename detail_::select_int_impl<
   parse_int<Digs...>::value
 , unsigned char
 , unsigned short
@@ -30,19 +34,19 @@ using select_parse_int = typename detail_::select_int_impl<
 >::type;
 
 
-namespace detail_ {
+namespace detail_{
   template<unsigned long long Val, class IntType, class... Ints>
   struct select_int_impl<Val, IntType, Ints...>
   : std::conditional<
     (Val <= std::numeric_limits<IntType>::max())
-  , std::integral_constant<IntType, Val>
+  , std::integral_constant<IntType, IntType(Val)>
   , select_int_impl<Val, Ints...>
   >::type
   {};
 
   template<unsigned long long Val>
   struct select_int_impl<Val>
-  {};
+  { static_assert(!Val&&Val, "norrowing conversion"); };
 } // namespace detail_
 
 } // namespace parse_number

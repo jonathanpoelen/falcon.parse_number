@@ -1,5 +1,6 @@
 #include "../include/falcon/literals/integer_constant.hpp"
-#include "../include/falcon/literals/select_integer_constant.hpp"
+#include "../include/falcon/literals/smallest_integer_constant.hpp"
+#include "../include/falcon/literals/fixed_integer_constant.hpp"
 
 template<class T> struct check {};
 
@@ -31,13 +32,25 @@ int main()
   CHECK(294, '0', 'b', '1', '0', '\'', '0', '1', '\'', '0', '0', '\'', '1', '1', '0');
 #undef CHECK
 
-#define CHECK(type, n) check<std::integral_constant<type, n>>{} = check<decltype(n##_ic)>{}
+#define CHECK(type, n) check<std::integral_constant<type, n>>{} = check<decltype(n##_usmall)>{}
   CHECK(unsigned char, 0);
   CHECK(unsigned char, 10);
   CHECK(unsigned char, 127);
   CHECK(unsigned char, 227);
   CHECK(unsigned char, 255);
   CHECK(unsigned short, 256);
+#undef CHECK
+
+#define CHECK(type, n) check<std::integral_constant<type, n>>{} = check<decltype(n##_small)>{}
+  CHECK(signed char, 0);
+  CHECK(signed char, 10);
+  CHECK(signed char, 127);
+  CHECK(short, 128);
+#undef CHECK
+
+#define CHECK(type, suf, n) check<std::integral_constant<type, n>>{} = check<decltype(n##_##suf)>{}
+  CHECK(uint16_t, u16, 12);
+  CHECK(int32_t, s32, 312);
 #undef CHECK
 
 }

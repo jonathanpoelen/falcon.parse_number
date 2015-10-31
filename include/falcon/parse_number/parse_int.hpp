@@ -16,7 +16,7 @@ namespace detail_ {
   struct parse_int_impl;
 }
 
-/// \brief  Deducts the base and uses parse_number
+/// \brief  Deducts the base and uses \ref parse_number
 template<char... Digs>
 using parse_int = typename detail_::parse_int_impl<Digs...>::type;
 
